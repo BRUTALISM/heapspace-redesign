@@ -18,9 +18,56 @@ $(function () {
 });
 </script> </header>
 
+
+
+<!-- Shaders -->
+
+<script type="x-shader/x-vertex" id="vertexshader">
+	uniform float amplitude;
+
+	attribute float displacement;
+
+	varying vec3 vNormal;
+	varying vec2 vUv;
+
+	void main() {
+		vNormal = normal;
+		vUv = ( 0.5 + amplitude ) * uv + vec2( amplitude );
+
+		vec3 newPosition = position + amplitude * normal * vec3( displacement );
+		gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+	}
+</script>
+
+<script type="x-shader/x-fragment" id="fragmentshader">
+	varying vec3 vNormal;
+	varying vec2 vUv;
+
+	uniform vec3 color;
+	uniform sampler2D texture;
+
+	void main() {
+		vec3 light = vec3( 0.5, 0.2, 1.0 );
+		light = normalize( light );
+
+		float dProd = dot( vNormal, light ) * 0.5 + 0.5;
+
+		// vec4 tcolor = texture2D( texture, vUv );
+		// vec4 gray = vec4( vec3( tcolor.r * 0.3 + tcolor.g * 0.59 + tcolor.b * 0.11 ), 1.0 );
+
+		// gl_FragColor = gray * vec4( vec3( dProd ) * vec3( color ), 1.0 );
+		gl_FragColor = vec4( vec3( dProd ) * vec3( color ), 1.0 );
+	}
+</script>
+
+<!-- Logic -->
+
 <script src="js/three.min.js" charset="utf-8"></script>
 <div id="background" width="300" height="300"></div>
 <script src="js/background.js" charset="utf-8"></script>
+
+<!-- End -->
+
 
 
 <section id="banner"> <div class="inner"> <div id="logo"><span id="hslogo"><img src="index_files/hs_logo.png"></span></div> <h2>HeapSpace</h2> <p>Pomažemo tehnološku zajednicu<br> kroz deljenje znanja<br> i iskustava.</p> <ul class="actions"> <li><a href="http://heapspace.rs/zajednica.html" class="button special">Upadaj!</a></li> </ul> </div> <a href="#one" class="more scrolly"><i class="fa fa-arrow-down"></i></a> </section> <section id="one" class="wrapper style1 special" style="padding-top:0"> <div class="or-spacer"><div class="mask"></div><span><i class="fa fa-calendar"></i></span></div> <div class="inner"> <ul class="events events_inverse"> <li> <a href="http://heapspace.rs/techdorucak/" title="Tehnološki Doručak 16"> <div class="date tekfast"> <div class="day">4</div> <div class="month">oktobar</div> </div> <div class="when-where"> <h4 class="title"><i class="fa fa-coffee"></i> Tehnološki Doručak 16</h4> <div class="time">8:00-9:30</div> <div>@ICT HUB Playground</div> <address><i class="fa fa-map-marker"></i> Kralja Milana 10, Beograd</address> </div> </a> </li> <script type="text/javascript">

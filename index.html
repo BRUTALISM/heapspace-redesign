@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="sr"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"> <title>HeapSpace</title> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <!--[if lte IE 8]><script src="/css/ie/html5shiv.js"></script><![endif]--> <link rel="stylesheet" href="index_files/main.css"> <link rel="stylesheet" href="index_files/nanogallery.css"> <!--[if lte IE 8]><link rel="stylesheet" href="/css/ie/v8.css"/><![endif]--> <!--[if lte IE 9]><link rel="stylesheet" href="/css/ie/v9.css"/><![endif]--> <!--[if lte IE 8]><script src="/css/ie/respond.min.js"></script><![endif]--> <link rel="apple-touch-icon" sizes="57x57" href="http://heapspace.rs/images/favicons/apple-icon-57x57.png"> <link rel="apple-touch-icon" sizes="60x60" href="http://heapspace.rs/images/favicons/apple-icon-60x60.png"> <link rel="apple-touch-icon" sizes="72x72" href="http://heapspace.rs/images/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="76x76" href="http://heapspace.rs/images/favicons/apple-icon-76x76.png"> <link rel="apple-touch-icon" sizes="114x114" href="http://heapspace.rs/images/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="120x120" href="http://heapspace.rs/images/favicons/apple-icon-120x120.png"> <link rel="apple-touch-icon" sizes="144x144" href="http://heapspace.rs/images/favicons/apple-icon-144x144.png"> <link rel="apple-touch-icon" sizes="152x152" href="http://heapspace.rs/images/favicons/apple-icon-152x152.png"> <link rel="apple-touch-icon" sizes="180x180" href="http://heapspace.rs/images/favicons/apple-icon-180x180.png"> <link rel="icon" type="image/png" sizes="192x192" href="http://heapspace.rs/images/favicons/android-icon-192x192.png"> <link rel="icon" type="image/png" sizes="32x32" href="http://heapspace.rs/images/favicons/favicon-32x32.png"> <link rel="icon" type="image/png" sizes="96x96" href="http://heapspace.rs/images/favicons/favicon-96x96.png"> <link rel="icon" type="image/png" sizes="16x16" href="http://heapspace.rs/images/favicons/favicon-16x16.png"> <link rel="manifest" href="http://heapspace.rs/images/favicons/manifest.json"> <meta name="msapplication-TileColor" content="#ffffff"> <meta name="msapplication-TileImage" content="/ms-icon-144x144.png"> <meta name="theme-color" content="#ffffff"> <script type="text/javascript" async="" src="index_files/linkid.js"></script><script async="" src="index_files/analytics.js"></script><script src="index_files/jquery-2.js"></script> <script async="" src="index_files/hotjar-169327.js"></script><script async="" src="index_files/modules-3474bcdf0768a446d3f92f4f03f2dd78.js"></script><style type="text/css">iframe#_hjRemoteVarsFrame {display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;}</style></head> <body class="landing"> <div id="page-wrapper"> <header id="header" class="alt"> <h1><a href="http://heapspace.rs/index.html"><img src="index_files/hs_logo_small.png"><span>HeapSpace</span></a></h1> <nav id="nav"> <ul> <li class="special"> <a href="#menu" class="menuToggle"><span>Meni</span></a>  </li> </ul> </nav> <div class="flipcount hide" style="display: none;"> <div class="flipwrap" data-link="techdorucak/"> <div class="flipevent"> Tehnološki Doručak 16 </div> <div class="clock"></div> </div> </div> <script type="text/javascript">
+$(function () {
+	var today = ((new Date().getTime())/1000)+(60*60*2);
+	var oneday = ((new Date().getTime())/1000)+(60*60)+(60*60*24);
+	var sevendays = ((new Date().getTime())/1000)+(60*60)+(7*60*60*24);
+	var targetdate = '1507104000';
+	if ((targetdate > today) && (targetdate < sevendays)) {
+		$('.clock').FlipClock((targetdate - today), {
+			clockFace: 'DailyCounter',
+			countdown: true
+		});
+		$('.flipcount').show();
+	} else {
+		$('.flipcount').hide();
+	}
+});
+</script> </header>
+
+<script src="js/three.min.js" charset="utf-8"></script>
+<div id="background" width="300" height="300"></div>
+<script src="js/background.js" charset="utf-8"></script>
+
+
+<section id="banner"> <div class="inner"> <div id="logo"><span id="hslogo"><img src="index_files/hs_logo.png"></span></div> <h2>HeapSpace</h2> <p>Pomažemo tehnološku zajednicu<br> kroz deljenje znanja<br> i iskustava.</p> <ul class="actions"> <li><a href="http://heapspace.rs/zajednica.html" class="button special">Upadaj!</a></li> </ul> </div> <a href="#one" class="more scrolly"><i class="fa fa-arrow-down"></i></a> </section> <section id="one" class="wrapper style1 special" style="padding-top:0"> <div class="or-spacer"><div class="mask"></div><span><i class="fa fa-calendar"></i></span></div> <div class="inner"> <ul class="events events_inverse"> <li> <a href="http://heapspace.rs/techdorucak/" title="Tehnološki Doručak 16"> <div class="date tekfast"> <div class="day">4</div> <div class="month">oktobar</div> </div> <div class="when-where"> <h4 class="title"><i class="fa fa-coffee"></i> Tehnološki Doručak 16</h4> <div class="time">8:00-9:30</div> <div>@ICT HUB Playground</div> <address><i class="fa fa-map-marker"></i> Kralja Milana 10, Beograd</address> </div> </a> </li> <script type="text/javascript">
+	$(function () {
+		var today = ((new Date().getTime())/1000)+(60*60);
+		var targetdate = '1507104000';
+		if (targetdate > today) {
+			$('.events_inverse .date.tekfast').append('<a class="icalboxed" href="techdorucak/index.ics" download="Tehnološki Doručak 16.ics"><i class="fa fa-calendar fa-2x"></i><br />iCal</a>');
+		}
+	});
+	</script> </ul> </div> </section> <section id="three" class="wrapper style3 special" style="padding-top:0"> <div class="or-spacer"><div class="mask"></div><span><i class="fa fa-code"></i></span></div> <div class="inner"> <header class="major"> <h2>HeapSpace Aktivnosti</h2> <p><b>10+</b> godina. <b>50+</b> događaja. <b>2</b> konferencije. <b>1500+</b> članova.</p> </header> <ul class="features"> <li data-link="http://belgrade.voxxeddays.com" style="width:100%"> <h3><i class="fa fa-star"></i>Voxxed Days Belgrade</h3> <p>Voxxed
+ Days Belgrade je najveća nezavisna tehnološka konferencija na ovim
+prostorima. U Beogradu je održana već dva puta, na jesen 2015. i 2016.
+godine. Prve godine, okupila je preko 500 inženjera iz Srbije i regiona,
+ a već naredne, broj posetilaca je porastao na 700.<br></p> </li> <li data-link="/events/index.html"> <h3><i class="fa fa-star"></i>Događaji</h3> <p>Organizujemo predavanja, panele, radionice, hackatone i konferencije. Delimo znanje mladima, početnicima i profesionalcima.</p> </li> <li data-link="opensource.html"> <h3><i class="fa fa-star"></i>Otvoreni Kod</h3> <p>Podržavamo i razvijamo projekte otvorenog koda u Srbiji, bez obzira na tehnologiju. Radimo na projektu Otvorenog znanja za sve.</p> </li> </ul> <p> <br> Neka <a href="http://heapspace.rs/faq.html">pitanja su <b>odgovorena</b></a>, za ostalo nam se <a href="#kontakt"><b>javite</b>.</a> <br><br> </p> </div> </section> <section id="cta" class="wrapper style4" style="padding-top:0;"> <div class="or-spacer"><div class="mask"></div><span><i class="fa fa-heart"></i></span></div> <div class="inner"> <header> <h2>HEAPSPACE</h2> <div style="margin-bottom: 20px; font-style:italic;">Mi smo tu da napravimo promenu.</div> <div style="padding-bottom: 40px;"><i class="fa fa-envelope"></i><a href="mailto:info@heapspace.rs">info@heapspace.rs</a></div> </header> <ul class="actions vertical"> <li><a href="http://heapspace.rs/zajednica.html" class="button fit special">HeapSpace</a></li> <li><a href="http://heapspace.rs/prijava.html" class="button fit">Prijavi se</a></li> </ul> </div> </section> <a href="#" name="kontakt"></a> <footer id="footer"> <ul class="icons"> <li><a href="https://github.com/HeapSpace" class="icon fa-github" target="_blank"><span class="label">GitHub</span></a></li> <li><a href="https://twitter.com/heap_space" class="icon fa-twitter" target="_blank"><span class="label">Twitter</span></a></li> <li><a href="https://www.linkedin.com/company/4871127" class="icon fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li> <li><a href="https://www.facebook.com/heapspace" class="icon fa-facebook" target="_blank"><span class="label">Facebook</span></a></li> <li><a href="https://instagram.com/_heapspace_" class="icon fa-instagram" target="_blank"><span class="label">Instagram</span></a></li> <li><a href="https://www.flickr.com/photos/136891384@N04" class="icon fa-flickr" target="_blank"><span class="label">Flickr</span></a></li> <li><a href="mailto:info@heapspace.rs" class="icon fa-envelope-o"><span class="label">Email</span></a></li> </ul> <ul class="copyright"> <li>© HeapSpace</li><li>Made with <i class="fa fa-heart"></i></li> </ul> <div id="license"> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="index_files/88x31.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">All work</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">HeapSpace</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. </div> </footer> </div> <script src="index_files/jquery_002.js"></script> <script src="index_files/jquery_003.js"></script> <script src="index_files/skel.js"></script> <script src="index_files/flipclock.js"></script> <script src="index_files/jquery.js"></script> <script src="index_files/util.js"></script> <script src="index_files/main.js"></script> <script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57157288-1', 'auto');
+  ga('require', 'linkid', 'linkid.js');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script> <script type="text/javascript">
+  // Hotjar Tracking Code for http://heapspace.rs
+  (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:169327,hjsv:5};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+  })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+</script>  <div id="menu"> <ul> <li><a href="http://heapspace.rs/index.html">Početna</a></li> <li><a href="http://heapspace.rs/events">Događaji</a></li> <li><a href="http://heapspace.rs/opensource.html">Open-Source</a></li> <li><a href="http://heapspace.rs/kids">HS :heart: kids</a></li> <li><a href="http://heapspace.rs/ukljuci-se.html">Uključi se</a></li> <li><a href="http://heapspace.rs/index.html#kontakt">Kontakt</a></li> <li><a class="github-edit" href="https://github.com/HeapSpace/website/edit/master/content/index.md"><i class="fa fa-pencil-square fa-2x"></i><span>Izmeni stranu</span></a></li> </ul> <a href="#menu" class="close"></a></div><iframe style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;" name="_hjRemoteVarsFrame" title="_hjRemoteVarsFrame" id="_hjRemoteVarsFrame" src="https://vars.hotjar.com/rcj-99d43ead6bdf30da8ed5ffcb4f17100c.html"></iframe></body></html>

@@ -4,11 +4,11 @@ var timeScale = 0.2;
 var distortionIntensity = new THREE.Vector3(50.0, 10.0, 0.0);
 var sphereCount = 12;
 var noiseFrequencyMin = 0.01;
-var noiseFrequencyMax = 0.06;
+var noiseFrequencyMax = 0.05;
 var positionXVariance = 50.0;
 var positionYVariance = 20.0;
 var radiusMin = 20.0;
-var radiusMax = 40.0;
+var radiusMax = 50.0;
 var segments = 256;
 var rings = 128;
 

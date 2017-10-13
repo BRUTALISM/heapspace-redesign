@@ -6,14 +6,6 @@
 <!-- Shaders -->
 
 <script type="x-shader/x-vertex" id="vertexshader">
-	uniform float amplitude;
-	uniform float time;
-
-	attribute float displacement;
-
-	varying vec3 vNormal;
-	varying vec2 vUv;
-
 	vec3 mod289(vec3 x)
 {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -178,39 +170,36 @@ float pnoise(vec3 P, vec3 rep)
   return 2.2 * n_xyz;
 }
 
+	uniform float time;
+	uniform float timeOffset;
+	uniform float noiseFrequency;
+	uniform vec3 distortionIntensity;
+
+	varying vec3 vNormal;
+
 	void main() {
 		vNormal = normal;
-		vUv = ( 0.5 + amplitude ) * uv + vec2( amplitude );
 
-		// vec3 newPosition = position + amplitude * normal * vec3( displacement );
-		// gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+		float intensity = dot(sin(time + timeOffset) * distortionIntensity, normal);
+		vec3 newPosition = position + pnoise(noiseFrequency * (position + vec3(time)), vec3(1000.0)) * intensity * normal;
 
-		float distortionIntensity = dot(sin(time) * vec3(80.0, 2.0, 2.0), normal);
-		// float distortionIntensity = 20.0 * sin(0.1 * time);
-		vec3 newPosition = position + pnoise(0.02 * (position + vec3(time)), vec3(10.0)) * distortionIntensity * normal;
 		gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
 	}
 </script>
 
 <script type="x-shader/x-fragment" id="fragmentshader">
 	varying vec3 vNormal;
-	varying vec2 vUv;
 
 	uniform vec3 color;
 	uniform sampler2D texture;
 
 	void main() {
-		vec3 light = vec3( 0.0, 1.0, 1.0 );
-		light = normalize( light );
+		vec3 light = vec3(0.0, 1.0, 1.0);
+		light = normalize(light);
 
-		float dProd = dot( vNormal, light ) * 0.5 + 0.5;
+		float dProd = dot(vNormal, light) * 0.5 + 0.5;
 
-		// vec4 tcolor = texture2D( texture, vUv );
-		// vec4 gray = vec4( vec3( tcolor.r * 0.3 + tcolor.g * 0.59 + tcolor.b * 0.11 ), 1.0 );
-
-		// gl_FragColor = gray * vec4( vec3( dProd ) * vec3( color ), 1.0 );
-		// gl_FragColor = vec4( vec3( dProd ) * vec3( color ), 1.0 );
-		gl_FragColor = vec4( vec3( dProd ) * vec3( color ), 1.0 );
+		gl_FragColor = vec4(vec3(dProd) * vec3(color), 1.0);
 	}
 </script>
 

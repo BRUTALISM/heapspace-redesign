@@ -1,41 +1,194 @@
 <!DOCTYPE html>
 <html lang="sr"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8"> <title>HeapSpace</title> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <!--[if lte IE 8]><script src="/css/ie/html5shiv.js"></script><![endif]--> <link rel="stylesheet" href="index_files/main.css"> <link rel="stylesheet" href="index_files/nanogallery.css"> <!--[if lte IE 8]><link rel="stylesheet" href="/css/ie/v8.css"/><![endif]--> <!--[if lte IE 9]><link rel="stylesheet" href="/css/ie/v9.css"/><![endif]--> <!--[if lte IE 8]><script src="/css/ie/respond.min.js"></script><![endif]--> <link rel="apple-touch-icon" sizes="57x57" href="http://heapspace.rs/images/favicons/apple-icon-57x57.png"> <link rel="apple-touch-icon" sizes="60x60" href="http://heapspace.rs/images/favicons/apple-icon-60x60.png"> <link rel="apple-touch-icon" sizes="72x72" href="http://heapspace.rs/images/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="76x76" href="http://heapspace.rs/images/favicons/apple-icon-76x76.png"> <link rel="apple-touch-icon" sizes="114x114" href="http://heapspace.rs/images/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="120x120" href="http://heapspace.rs/images/favicons/apple-icon-120x120.png"> <link rel="apple-touch-icon" sizes="144x144" href="http://heapspace.rs/images/favicons/apple-icon-144x144.png"> <link rel="apple-touch-icon" sizes="152x152" href="http://heapspace.rs/images/favicons/apple-icon-152x152.png"> <link rel="apple-touch-icon" sizes="180x180" href="http://heapspace.rs/images/favicons/apple-icon-180x180.png"> <link rel="icon" type="image/png" sizes="192x192" href="http://heapspace.rs/images/favicons/android-icon-192x192.png"> <link rel="icon" type="image/png" sizes="32x32" href="http://heapspace.rs/images/favicons/favicon-32x32.png"> <link rel="icon" type="image/png" sizes="96x96" href="http://heapspace.rs/images/favicons/favicon-96x96.png"> <link rel="icon" type="image/png" sizes="16x16" href="http://heapspace.rs/images/favicons/favicon-16x16.png"> <link rel="manifest" href="http://heapspace.rs/images/favicons/manifest.json"> <meta name="msapplication-TileColor" content="#ffffff"> <meta name="msapplication-TileImage" content="/ms-icon-144x144.png"> <meta name="theme-color" content="#ffffff"> <script type="text/javascript" async="" src="index_files/linkid.js"></script><script async="" src="index_files/analytics.js"></script><script src="index_files/jquery-2.js"></script> <script async="" src="index_files/hotjar-169327.js"></script><script async="" src="index_files/modules-3474bcdf0768a446d3f92f4f03f2dd78.js"></script><style type="text/css">iframe#_hjRemoteVarsFrame {display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;}</style></head> <body class="landing"> <div id="page-wrapper"> <header id="header" class="alt"> <h1><a href="http://heapspace.rs/index.html"><img src="index_files/hs_logo_small.png"><span>HeapSpace</span></a></h1> <nav id="nav"> <ul> <li class="special"> <a href="#menu" class="menuToggle"><span>Meni</span></a>  </li> </ul> </nav> <div class="flipcount hide" style="display: none;"> <div class="flipwrap" data-link="techdorucak/"> <div class="flipevent"> Tehnološki Doručak 16 </div> <div class="clock"></div> </div> </div> <script type="text/javascript">
-$(function () {
-	var today = ((new Date().getTime())/1000)+(60*60*2);
-	var oneday = ((new Date().getTime())/1000)+(60*60)+(60*60*24);
-	var sevendays = ((new Date().getTime())/1000)+(60*60)+(7*60*60*24);
-	var targetdate = '1507104000';
-	if ((targetdate > today) && (targetdate < sevendays)) {
-		$('.clock').FlipClock((targetdate - today), {
-			clockFace: 'DailyCounter',
-			countdown: true
-		});
-		$('.flipcount').show();
-	} else {
-		$('.flipcount').hide();
-	}
-});
-</script> </header>
-
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"> <title>HeapSpace</title> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <!--[if lte IE 8]><script src="/css/ie/html5shiv.js"></script><![endif]--> <link rel="stylesheet" href="index_files/main.css"></header>
 
 
 <!-- Shaders -->
 
 <script type="x-shader/x-vertex" id="vertexshader">
 	uniform float amplitude;
+	uniform float time;
 
 	attribute float displacement;
 
 	varying vec3 vNormal;
 	varying vec2 vUv;
 
+	vec3 mod289(vec3 x)
+{
+  return x - floor(x * (1.0 / 289.0)) * 289.0;
+}
+
+vec4 mod289(vec4 x)
+{
+  return x - floor(x * (1.0 / 289.0)) * 289.0;
+}
+
+vec4 permute(vec4 x)
+{
+  return mod289(((x*34.0)+1.0)*x);
+}
+
+vec4 taylorInvSqrt(vec4 r)
+{
+  return 1.79284291400159 - 0.85373472095314 * r;
+}
+
+vec3 fade(vec3 t) {
+  return t*t*t*(t*(t*6.0-15.0)+10.0);
+}
+
+// Classic Perlin noise
+float cnoise(vec3 P)
+{
+  vec3 Pi0 = floor(P); // Integer part for indexing
+  vec3 Pi1 = Pi0 + vec3(1.0); // Integer part + 1
+  Pi0 = mod289(Pi0);
+  Pi1 = mod289(Pi1);
+  vec3 Pf0 = fract(P); // Fractional part for interpolation
+  vec3 Pf1 = Pf0 - vec3(1.0); // Fractional part - 1.0
+  vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
+  vec4 iy = vec4(Pi0.yy, Pi1.yy);
+  vec4 iz0 = Pi0.zzzz;
+  vec4 iz1 = Pi1.zzzz;
+
+  vec4 ixy = permute(permute(ix) + iy);
+  vec4 ixy0 = permute(ixy + iz0);
+  vec4 ixy1 = permute(ixy + iz1);
+
+  vec4 gx0 = ixy0 * (1.0 / 7.0);
+  vec4 gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5;
+  gx0 = fract(gx0);
+  vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
+  vec4 sz0 = step(gz0, vec4(0.0));
+  gx0 -= sz0 * (step(0.0, gx0) - 0.5);
+  gy0 -= sz0 * (step(0.0, gy0) - 0.5);
+
+  vec4 gx1 = ixy1 * (1.0 / 7.0);
+  vec4 gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5;
+  gx1 = fract(gx1);
+  vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
+  vec4 sz1 = step(gz1, vec4(0.0));
+  gx1 -= sz1 * (step(0.0, gx1) - 0.5);
+  gy1 -= sz1 * (step(0.0, gy1) - 0.5);
+
+  vec3 g000 = vec3(gx0.x,gy0.x,gz0.x);
+  vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
+  vec3 g010 = vec3(gx0.z,gy0.z,gz0.z);
+  vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
+  vec3 g001 = vec3(gx1.x,gy1.x,gz1.x);
+  vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
+  vec3 g011 = vec3(gx1.z,gy1.z,gz1.z);
+  vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
+
+  vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
+  g000 *= norm0.x;
+  g010 *= norm0.y;
+  g100 *= norm0.z;
+  g110 *= norm0.w;
+  vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
+  g001 *= norm1.x;
+  g011 *= norm1.y;
+  g101 *= norm1.z;
+  g111 *= norm1.w;
+
+  float n000 = dot(g000, Pf0);
+  float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
+  float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
+  float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
+  float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
+  float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
+  float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
+  float n111 = dot(g111, Pf1);
+
+  vec3 fade_xyz = fade(Pf0);
+  vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
+  vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
+  float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
+  return 2.2 * n_xyz;
+}
+
+// Classic Perlin noise, periodic variant
+float pnoise(vec3 P, vec3 rep)
+{
+  vec3 Pi0 = mod(floor(P), rep); // Integer part, modulo period
+  vec3 Pi1 = mod(Pi0 + vec3(1.0), rep); // Integer part + 1, mod period
+  Pi0 = mod289(Pi0);
+  Pi1 = mod289(Pi1);
+  vec3 Pf0 = fract(P); // Fractional part for interpolation
+  vec3 Pf1 = Pf0 - vec3(1.0); // Fractional part - 1.0
+  vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
+  vec4 iy = vec4(Pi0.yy, Pi1.yy);
+  vec4 iz0 = Pi0.zzzz;
+  vec4 iz1 = Pi1.zzzz;
+
+  vec4 ixy = permute(permute(ix) + iy);
+  vec4 ixy0 = permute(ixy + iz0);
+  vec4 ixy1 = permute(ixy + iz1);
+
+  vec4 gx0 = ixy0 * (1.0 / 7.0);
+  vec4 gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5;
+  gx0 = fract(gx0);
+  vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
+  vec4 sz0 = step(gz0, vec4(0.0));
+  gx0 -= sz0 * (step(0.0, gx0) - 0.5);
+  gy0 -= sz0 * (step(0.0, gy0) - 0.5);
+
+  vec4 gx1 = ixy1 * (1.0 / 7.0);
+  vec4 gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5;
+  gx1 = fract(gx1);
+  vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
+  vec4 sz1 = step(gz1, vec4(0.0));
+  gx1 -= sz1 * (step(0.0, gx1) - 0.5);
+  gy1 -= sz1 * (step(0.0, gy1) - 0.5);
+
+  vec3 g000 = vec3(gx0.x,gy0.x,gz0.x);
+  vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
+  vec3 g010 = vec3(gx0.z,gy0.z,gz0.z);
+  vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
+  vec3 g001 = vec3(gx1.x,gy1.x,gz1.x);
+  vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
+  vec3 g011 = vec3(gx1.z,gy1.z,gz1.z);
+  vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
+
+  vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
+  g000 *= norm0.x;
+  g010 *= norm0.y;
+  g100 *= norm0.z;
+  g110 *= norm0.w;
+  vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
+  g001 *= norm1.x;
+  g011 *= norm1.y;
+  g101 *= norm1.z;
+  g111 *= norm1.w;
+
+  float n000 = dot(g000, Pf0);
+  float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
+  float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
+  float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
+  float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
+  float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
+  float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
+  float n111 = dot(g111, Pf1);
+
+  vec3 fade_xyz = fade(Pf0);
+  vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
+  vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
+  float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
+  return 2.2 * n_xyz;
+}
+
 	void main() {
 		vNormal = normal;
 		vUv = ( 0.5 + amplitude ) * uv + vec2( amplitude );
 
-		vec3 newPosition = position + amplitude * normal * vec3( displacement );
-		gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+		// vec3 newPosition = position + amplitude * normal * vec3( displacement );
+		// gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+
+		float distortionIntensity = dot(sin(time) * vec3(80.0, 2.0, 2.0), normal);
+		// float distortionIntensity = 20.0 * sin(0.1 * time);
+		vec3 newPosition = position + pnoise(0.02 * (position + vec3(time)), vec3(10.0)) * distortionIntensity * normal;
+		gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
 	}
 </script>
 
@@ -47,7 +200,7 @@ $(function () {
 	uniform sampler2D texture;
 
 	void main() {
-		vec3 light = vec3( 0.5, 0.2, 1.0 );
+		vec3 light = vec3( 0.0, 1.0, 1.0 );
 		light = normalize( light );
 
 		float dProd = dot( vNormal, light ) * 0.5 + 0.5;
@@ -56,6 +209,7 @@ $(function () {
 		// vec4 gray = vec4( vec3( tcolor.r * 0.3 + tcolor.g * 0.59 + tcolor.b * 0.11 ), 1.0 );
 
 		// gl_FragColor = gray * vec4( vec3( dProd ) * vec3( color ), 1.0 );
+		// gl_FragColor = vec4( vec3( dProd ) * vec3( color ), 1.0 );
 		gl_FragColor = vec4( vec3( dProd ) * vec3( color ), 1.0 );
 	}
 </script>
@@ -70,15 +224,7 @@ $(function () {
 
 
 
-<section id="banner"> <div class="inner"> <div id="logo"><span id="hslogo"><img src="index_files/hs_logo.png"></span></div> <h2>HeapSpace</h2> <p>Pomažemo tehnološku zajednicu<br> kroz deljenje znanja<br> i iskustava.</p> <ul class="actions"> <li><a href="http://heapspace.rs/zajednica.html" class="button special">Upadaj!</a></li> </ul> </div> <a href="#one" class="more scrolly"><i class="fa fa-arrow-down"></i></a> </section> <section id="one" class="wrapper style1 special" style="padding-top:0"> <div class="or-spacer"><div class="mask"></div><span><i class="fa fa-calendar"></i></span></div> <div class="inner"> <ul class="events events_inverse"> <li> <a href="http://heapspace.rs/techdorucak/" title="Tehnološki Doručak 16"> <div class="date tekfast"> <div class="day">4</div> <div class="month">oktobar</div> </div> <div class="when-where"> <h4 class="title"><i class="fa fa-coffee"></i> Tehnološki Doručak 16</h4> <div class="time">8:00-9:30</div> <div>@ICT HUB Playground</div> <address><i class="fa fa-map-marker"></i> Kralja Milana 10, Beograd</address> </div> </a> </li> <script type="text/javascript">
-	$(function () {
-		var today = ((new Date().getTime())/1000)+(60*60);
-		var targetdate = '1507104000';
-		if (targetdate > today) {
-			$('.events_inverse .date.tekfast').append('<a class="icalboxed" href="techdorucak/index.ics" download="Tehnološki Doručak 16.ics"><i class="fa fa-calendar fa-2x"></i><br />iCal</a>');
-		}
-	});
-	</script> </ul> </div> </section> <section id="three" class="wrapper style3 special" style="padding-top:0"> <div class="or-spacer"><div class="mask"></div><span><i class="fa fa-code"></i></span></div> <div class="inner"> <header class="major"> <h2>HeapSpace Aktivnosti</h2> <p><b>10+</b> godina. <b>50+</b> događaja. <b>2</b> konferencije. <b>1500+</b> članova.</p> </header> <ul class="features"> <li data-link="http://belgrade.voxxeddays.com" style="width:100%"> <h3><i class="fa fa-star"></i>Voxxed Days Belgrade</h3> <p>Voxxed
+<section id="banner"> <div class="inner"> <div id="logo"><span id="hslogo"><img src="index_files/hs_logo.png"></span></div> <h2>HeapSpace</h2> <p>Pomažemo tehnološku zajednicu<br> kroz deljenje znanja<br> i iskustava.</p> <ul class="actions"> <li><a href="http://heapspace.rs/zajednica.html" class="button special">Upadaj!</a></li> </ul> </div> <a href="#one" class="more scrolly"><i class="fa fa-arrow-down"></i></a> </section> <section id="one" class="wrapper style1 special" style="padding-top:0"> <div class="or-spacer"><div class="mask"></div><span><i class="fa fa-calendar"></i></span></div> <div class="inner"> <ul class="events events_inverse"> <li> <a href="http://heapspace.rs/techdorucak/" title="Tehnološki Doručak 16"> <div class="date tekfast"> <div class="day">4</div> <div class="month">oktobar</div> </div> <div class="when-where"> <h4 class="title"><i class="fa fa-coffee"></i> Tehnološki Doručak 16</h4> <div class="time">8:00-9:30</div> <div>@ICT HUB Playground</div> <address><i class="fa fa-map-marker"></i> Kralja Milana 10, Beograd</address> </div> </a> </li> </ul> </div> </section> <section id="three" class="wrapper style3 special" style="padding-top:0"> <div class="or-spacer"><div class="mask"></div><span><i class="fa fa-code"></i></span></div> <div class="inner"> <header class="major"> <h2>HeapSpace Aktivnosti</h2> <p><b>10+</b> godina. <b>50+</b> događaja. <b>2</b> konferencije. <b>1500+</b> članova.</p> </header> <ul class="features"> <li data-link="http://belgrade.voxxeddays.com" style="width:100%"> <h3><i class="fa fa-star"></i>Voxxed Days Belgrade</h3> <p>Voxxed
  Days Belgrade je najveća nezavisna tehnološka konferencija na ovim
 prostorima. U Beogradu je održana već dva puta, na jesen 2015. i 2016.
 godine. Prve godine, okupila je preko 500 inženjera iz Srbije i regiona,

@@ -1,10 +1,9 @@
 var renderer, scene, camera;
-
-var sphere, uniforms;
-
+var sphere, uniforms, shaderMaterial;
 var displacement, noise;
 
 init();
+var startTime = Date.now();
 animate();
 
 function init() {
@@ -18,17 +17,19 @@ function init() {
 		amplitude: {
 			value: 1.0
 		},
+		time: {
+			value: 0.5
+		},
 		color: {
 			value: new THREE.Color(0x00A5A5)
 		}
 	};
 
-	var shaderMaterial = new THREE.ShaderMaterial({
+	shaderMaterial = new THREE.ShaderMaterial({
 		uniforms: uniforms,
 		vertexShader: document.getElementById('vertexshader').textContent,
 		fragmentShader: document.getElementById('fragmentshader').textContent
 	});
-
 
 	var radius = 50,
 		segments = 128,
@@ -72,12 +73,12 @@ function animate() {
 }
 
 function render() {
-	var time = Date.now() * 0.01;
+	var elapsedMilliseconds = Date.now() - startTime;
+	var time = elapsedMilliseconds / 1000.;
 
-	sphere.rotation.y = sphere.rotation.z = 0.01 * time;
-
+	uniforms.time.value = time;
 	uniforms.amplitude.value = 2.5 * Math.sin(sphere.rotation.y * 0.125);
-	uniforms.color.value.offsetHSL(0.0005, 0, 0);
+	// uniforms.color.value.offsetHSL(0.0005, 0, 0);
 
 	for (var i = 0; i < displacement.length; i++) {
 		displacement[i] = Math.sin(0.1 * i + time);

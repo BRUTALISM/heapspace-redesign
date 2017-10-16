@@ -1,7 +1,7 @@
-var mainColor = new THREE.Color(0x3A51F0);
-var backgroundColor = new THREE.Color(0xFFFFFF);
-var timeScale = 0.2;
-var distortionIntensity = new THREE.Vector3(50.0, 10.0, 0.0);
+var mainColor = new THREE.Color(0x384AF4);
+var backgroundColor = new THREE.Color(0x384AF4);
+var timeScale = 0.1;
+var distortionIntensity = new THREE.Vector3(50.0, 10.0, 50.0);
 var sphereCount = 12;
 var noiseFrequencyMin = 0.01;
 var noiseFrequencyMax = 0.05;

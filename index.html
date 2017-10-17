@@ -1,14 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="sr">
-  <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>HeapSpace</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-  <!--[if lte IE 8]><script src="/css/ie/html5shiv.js"></script><![endif]--> 
-<!--   <link rel="stylesheet" href="index_files/main.css">
-</header> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +7,7 @@
     <title>Heapspace</title>
     <meta name="description" content="~~~X~~~X~~~X~~~">
     <meta name="keywords" content="~~~X~~~X~~~X~~~">
-    
+
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="~~~X~~~X~~~X~~~">
     <meta name="twitter:title" content="~~~X~~~X~~~X~~~">
@@ -30,15 +19,14 @@
     <meta property="og:title" content="~~~X~~~X~~~X~~~"/>
     <meta property="og:description" content="~~~X~~~X~~~X~~~"/>
     <meta property="og:image" content="~~~X~~~X~~~X~~~"/>
-    <meta property="og:image:width" content="200" />
-    <meta property="og:image:height" content="200" />
+    <meta property="og:image:width" content="200"/>
+    <meta property="og:image:height" content="200"/>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="index_files/main.css">
 </head>
-
-
+<body>
 <!-- Shaders -->
-
 <script type="x-shader/x-vertex" id="vertexshader">
 	vec3 mod289(vec3 x)
 {
@@ -219,8 +207,10 @@ float pnoise(vec3 P, vec3 rep)
 
 		gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
 	}
-</script>
 
+
+
+</script>
 <script type="x-shader/x-fragment" id="fragmentshader">
 	varying vec3 vNormal;
 
@@ -235,131 +225,38 @@ float pnoise(vec3 P, vec3 rep)
 
 		gl_FragColor = vec4(vec3(dProd) * vec3(color), 1.0);
 	}
+
+
+
 </script>
 
 <!-- Logic -->
-
 <script src="js/three.min.js" charset="utf-8"></script>
 <div id="background" width="300" height="300"></div>
 <script src="js/background.js" charset="utf-8"></script>
-
 <!-- End -->
 
-
 <section id="banner">
-  <div class="inner">
-    <div id="logo"><span id="hslogo"><img src="index_files/hs_logo.png"></span></div>
-    <h2>HeapSpace</h2>
-    <p>Pomažemo tehnološku zajednicu<br> kroz deljenje znanja<br> i iskustava.</p>
-    <ul class="actions">
-      <li><a href="http://heapspace.rs/zajednica.html" class="button special">Upadaj!</a></li>
-    </ul>
-  </div>
-  <a href="#one" class="more scrolly"><i class="fa fa-arrow-down"></i></a> 
+    <div class="inner">
+        <div id="logo"><span id="hslogo"><img src="index_files/HS_logo_white.svg"></span></div>
+        <p>Heapspace is helping the local tech scene flourish.<br><br>We are an open community for those who are in love with technology and our ultimate goal is knowledge sharing.</p>
+        <p><br>Check out our new project <a href="http://heapcon.io" target="_blank">heapcon.io</a></p>
+    </div>
 </section>
-
-<section id="one" class="wrapper style1 special" style="padding-top:0">
-  <div class="or-spacer">
-    <div class="mask"></div>
-    <span><i class="fa fa-calendar"></i></span>
-  </div>
-  <div class="inner">
-    <ul class="events events_inverse">
-      <li>
-        <a href="http://heapspace.rs/techdorucak/" title="Tehnološki Doručak 16">
-          <div class="date tekfast">
-            <div class="day">4</div>
-            <div class="month">oktobar</div>
-          </div>
-          <div class="when-where">
-            <h4 class="title"><i class="fa fa-coffee"></i> Tehnološki Doručak 16</h4>
-            <div class="time">8:00-9:30</div>
-            <div>@ICT HUB Playground</div>
-            <address><i class="fa fa-map-marker"></i> Kralja Milana 10, Beograd</address>
-          </div>
-        </a>
-      </li>
-    </ul>
-  </div>
-</section>
-<section id="three" class="wrapper style3 special" style="padding-top:0">
-  <div class="or-spacer">
-    <div class="mask"></div>
-    <span><i class="fa fa-code"></i></span>
-  </div>
-  <div class="inner">
-    <header class="major">
-      <h2>HeapSpace Aktivnosti</h2>
-      <p><b>10+</b> godina. <b>50+</b> događaja. <b>2</b> konferencije. <b>1500+</b> članova.</p>
-    </header>
-    <ul class="features">
-      <li data-link="http://belgrade.voxxeddays.com" style="width:100%">
-        <h3><i class="fa fa-star"></i>Voxxed Days Belgrade</h3>
-        <p>Voxxed
-          Days Belgrade je najveća nezavisna tehnološka konferencija na ovim
-          prostorima. U Beogradu je održana već dva puta, na jesen 2015. i 2016.
-          godine. Prve godine, okupila je preko 500 inženjera iz Srbije i regiona,
-          a već naredne, broj posetilaca je porastao na 700.<br>
-        </p>
-      </li>
-      <li data-link="/events/index.html">
-        <h3><i class="fa fa-star"></i>Događaji</h3>
-        <p>Organizujemo predavanja, panele, radionice, hackatone i konferencije. Delimo znanje mladima, početnicima i profesionalcima.</p>
-      </li>
-      <li data-link="opensource.html">
-        <h3><i class="fa fa-star"></i>Otvoreni Kod</h3>
-        <p>Podržavamo i razvijamo projekte otvorenog koda u Srbiji, bez obzira na tehnologiju. Radimo na projektu Otvorenog znanja za sve.</p>
-      </li>
-    </ul>
-    <p> <br> Neka <a href="http://heapspace.rs/faq.html">pitanja su <b>odgovorena</b></a>, za ostalo nam se <a href="#kontakt"><b>javite</b>.</a> <br><br> </p>
-  </div>
-</section>
-<section id="cta" class="wrapper style4" style="padding-top:0;">
-  <div class="or-spacer">
-    <div class="mask"></div>
-    <span><i class="fa fa-heart"></i></span>
-  </div>
-  <div class="inner">
-    <header>
-      <h2>HEAPSPACE</h2>
-      <div style="margin-bottom: 20px; font-style:italic;">Mi smo tu da napravimo promenu.</div>
-      <div style="padding-bottom: 40px;"><i class="fa fa-envelope"></i><a href="mailto:info@heapspace.rs">info@heapspace.rs</a></div>
-    </header>
-    <ul class="actions vertical">
-      <li><a href="http://heapspace.rs/zajednica.html" class="button fit special">HeapSpace</a></li>
-      <li><a href="http://heapspace.rs/prijava.html" class="button fit">Prijavi se</a></li>
-    </ul>
-  </div>
-</section>
-<a href="#" name="kontakt"></a> 
-<footer id="footer">
-  <ul class="icons">
-    <li><a href="https://github.com/HeapSpace" class="icon fa-github" target="_blank"><span class="label">GitHub</span></a></li>
-    <li><a href="https://twitter.com/heap_space" class="icon fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
-    <li><a href="https://www.linkedin.com/company/4871127" class="icon fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-    <li><a href="https://www.facebook.com/heapspace" class="icon fa-facebook" target="_blank"><span class="label">Facebook</span></a></li>
-    <li><a href="https://instagram.com/_heapspace_" class="icon fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
-    <li><a href="https://www.flickr.com/photos/136891384@N04" class="icon fa-flickr" target="_blank"><span class="label">Flickr</span></a></li>
-    <li><a href="mailto:info@heapspace.rs" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-  </ul>
-  <ul class="copyright">
-    <li>© HeapSpace</li>
-    <li>Made with <i class="fa fa-heart"></i></li>
-  </ul>
-  <div id="license"> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="index_files/88x31.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">All work</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">HeapSpace</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. </div>
+<footer>
+    <p>We go places, come with us:<br>
+        <a href="https://github.com/HeapSpace" target="_blank">GitHub</a>,
+        <a href="https://twitter.com/heap_space" target="_blank">Twitter</a>,
+        <a href="https://www.flickr.com/photos/136891384@N04" class="black" target="_blank">Flickr</a>,
+        <a href="https://instagram.com/_heapspace_" target="_blank">Instagram</a>,
+        <a href="https://www.linkedin.com/company/4871127" target="_blank">LinkedIn</a>,
+        <a href="https://www.facebook.com/heapspace" target="_blank">Facebook</a>,
+        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;tf=1&amp;to=info@heapspace.rs" target="_blank">Email</a>
+    </p>
+    <p>© <script type="text/javascript">
+        document.write(new Date().getFullYear());
+    </script> heapspace</p>
 </footer>
-</div>  
-<div id="menu">
-  <ul>
-    <li><a href="http://heapspace.rs/index.html">Početna</a></li>
-    <li><a href="http://heapspace.rs/events">Događaji</a></li>
-    <li><a href="http://heapspace.rs/opensource.html">Open-Source</a></li>
-    <li><a href="http://heapspace.rs/kids">HS :heart: kids</a></li>
-    <li><a href="http://heapspace.rs/ukljuci-se.html">Uključi se</a></li>
-    <li><a href="http://heapspace.rs/index.html#kontakt">Kontakt</a></li>
-    <li><a class="github-edit" href="https://github.com/HeapSpace/website/edit/master/content/index.md"><i class="fa fa-pencil-square fa-2x"></i><span>Izmeni stranu</span></a></li>
-  </ul>
-  <a href="#menu" class="close"></a>
-</div>
-<iframe style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;" name="_hjRemoteVarsFrame" title="_hjRemoteVarsFrame" id="_hjRemoteVarsFrame" src="https://vars.hotjar.com/rcj-99d43ead6bdf30da8ed5ffcb4f17100c.html"></iframe></body></html>
+</body>
+</html>
 

@@ -119,6 +119,7 @@ p {
     justify-content: center;
     cursor: default;
     height: 100vh;
+    min-height: 35em;
     overflow: hidden;
     position: relative;
     text-align: center
@@ -199,6 +200,32 @@ footer p a {
     width: 40%;
 }
 
+footer {
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -moz-flex-direction: column;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    cursor: default;
+    overflow: hidden;
+    position: relative;
+    padding: 2rem 0;
+    background-color: #FD4000;
+    text-align: center;
+    color: #231f20;
+}
+
+footer p:first-child {
+    margin-bottom: 1rem;
+}
+
 @media screen and (max-width: 736px) {
     #banner {
         padding: 7em 2em 5em 2em;
@@ -226,28 +253,13 @@ footer p a {
     }
 }
 
-footer {
-    display: -moz-flex;
-    display: -webkit-flex;
-    display: -ms-flex;
-    display: flex;
-    -moz-flex-direction: column;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
-    -ms-justify-content: center;
-    justify-content: center;
-    cursor: default;
-    overflow: hidden;
-    position: relative;
-    height: 21vh;
-    background-color: #FD4000;
-    text-align: center;
-    color: #231f20;
-}
+@media screen and (max-width: 460px) {
+    #banner {
+        padding: 2rem;
+        height: auto;
+    }
 
-footer p:first-child {
-    margin-bottom: 1rem;
+    #background {
+        position: fixed;
+    }
 }
